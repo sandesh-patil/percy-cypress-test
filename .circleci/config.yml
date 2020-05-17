@@ -10,6 +10,12 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
+             - save_cache:
+          key: v1-npm-deps-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+            - ~/.cache
+            - ~/.npm
             - run: npm test
 workflows:
     build-and-test:
